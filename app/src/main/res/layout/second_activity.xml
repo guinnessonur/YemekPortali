@@ -18,7 +18,8 @@
 
         <HorizontalScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:scrollbarSize="7dp">
 
             <TabWidget
                 android:id="@android:id/tabs"
@@ -52,7 +53,17 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="asdfb"/>
+                        android:text="@string/rastgele_yemek"
+                        android:onClick="randomizer"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/random"
+                        android:textSize="40sp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_weight="1"/>
 
                 </LinearLayout>
 
@@ -67,6 +78,12 @@
                         android:layout_gravity="right"
                         android:text="@string/not_ekle"
                         android:onClick="addGroceries"/>
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:text="@string/not_sil"
+                        android:onClick="deleteGroceries"/>
 
                 </LinearLayout>
 

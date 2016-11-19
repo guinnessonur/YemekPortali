@@ -9,8 +9,10 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import static android.R.attr.height;
 import static android.R.attr.width;
@@ -59,5 +61,17 @@ public class SecondActivity extends Activity {
         LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         linearLayout.addView(editText,lp);
         notes.add(editText);
+    }
+
+    public void deleteGroceries(View view) {
+        notes.remove(1);
+    }
+
+    public void randomizer(View view) {
+        Random r=new Random();
+        int x=r.nextInt(5);
+        TextView textView=(TextView)findViewById(R.id.random);
+        textView.setText(x+"");
+
     }
 }

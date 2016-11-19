@@ -4,7 +4,16 @@ package com.portali.yemek.yemekportali;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TabHost;
+
+import java.util.ArrayList;
+
+import static android.R.attr.height;
+import static android.R.attr.width;
 
 /**
  * Created by GURKAN32 on 10/21/2016.
@@ -13,6 +22,7 @@ import android.widget.TabHost;
 
 public class SecondActivity extends Activity {
 
+    ArrayList<EditText> notes=new ArrayList<EditText>();
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.second_activity);
@@ -39,5 +49,15 @@ public class SecondActivity extends Activity {
         specs.setContent(R.id.tab4);
         specs.setIndicator("Favoriler");
         th.addTab(specs);
+
+    }
+
+    public void addGroceries(View view) {
+
+        LinearLayout linearLayout=(LinearLayout) findViewById(R.id.tab3);
+        EditText editText=new EditText(this);
+        LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        linearLayout.addView(editText,lp);
+        notes.add(editText);
     }
 }

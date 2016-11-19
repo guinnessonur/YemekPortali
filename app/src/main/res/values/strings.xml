@@ -7,5 +7,6 @@
     <string name="error_box"> </string>
     <string name="user_name">Kullanıcı Adı</string>
     <string name="user_password">Şifre</string>
+    <string name="not_ekle">Not Ekle</string>
 
 </resources>

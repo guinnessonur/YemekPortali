@@ -6,12 +6,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 import static android.R.attr.height;
@@ -24,7 +29,8 @@ import static android.R.attr.width;
 
 public class SecondActivity extends Activity {
 
-    ArrayList<EditText> notes=new ArrayList<EditText>();
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.second_activity);
@@ -52,19 +58,29 @@ public class SecondActivity extends Activity {
         specs.setIndicator("Favoriler");
         th.addTab(specs);
 
+        AdapterView.OnItemClickListener itemClickListener=new AdapterView.OnItemClickListener(){
+            public void onItemClick(AdapterView<?> listView,View itemView,int position,long id){
+                if(position==0){
+                    //TO DO
+                }
+            }
+        };
+
+
+
+
+
+
     }
 
     public void addGroceries(View view) {
+        EditText editText=(EditText)(findViewById(R.id.itemName));
 
-        LinearLayout linearLayout=(LinearLayout) findViewById(R.id.tab3);
-        EditText editText=new EditText(this);
-        LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        linearLayout.addView(editText,lp);
-        notes.add(editText);
     }
 
     public void deleteGroceries(View view) {
-        notes.remove(1);
+
+
     }
 
     public void randomizer(View view) {
@@ -74,4 +90,7 @@ public class SecondActivity extends Activity {
         textView.setText(x+"");
 
     }
+
+
+
 }

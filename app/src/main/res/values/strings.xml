@@ -10,5 +10,10 @@
     <string name="not_ekle">Not Ekle</string>
     <string name="not_sil">not sil</string>
     <string name="rastgele_yemek">Rastgele Yemek</string>
+    <string-array name="options">
+        <item>ships</item>
+        <item>deneme</item>
+
+    </string-array>
 
 </resources>

@@ -13,7 +13,14 @@
     <string-array name="options">
         <item>ships</item>
         <item>deneme</item>
-
+    </string-array>
+    <string-array name="forum">
+        <item>Shared Recipes</item>
+        <item>My Recipes</item>
+    </string-array>
+    <string-array name="type">
+        <item>Main Dish</item>
+        <item>Dessert</item>
     </string-array>
 
 </resources>

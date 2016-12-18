@@ -40,22 +40,22 @@ public class SecondActivity extends Activity {
         th.setup();
         TabHost.TabSpec specs=th.newTabSpec("tag1");
         specs.setContent(R.id.tab1);
-        specs.setIndicator("Yemek Paylaş");
+        specs.setIndicator("Share Recipe");
         th.addTab(specs);
 
         specs=th.newTabSpec("tag2");
         specs.setContent(R.id.tab2);
-        specs.setIndicator("Rastgele Yemek");
+        specs.setIndicator("Random Meal");
         th.addTab(specs);
 
         specs=th.newTabSpec("tag3");
         specs.setContent(R.id.tab3);
-        specs.setIndicator("Alış-Veriş Listesi");
+        specs.setIndicator("Grocery List");
         th.addTab(specs);
 
         specs=th.newTabSpec("tag4");
         specs.setContent(R.id.tab4);
-        specs.setIndicator("Favoriler");
+        specs.setIndicator("Favorites");
         th.addTab(specs);
 
         AdapterView.OnItemClickListener itemClickListener=new AdapterView.OnItemClickListener(){
@@ -74,7 +74,7 @@ public class SecondActivity extends Activity {
     }
 
     public void addGroceries(View view) {
-        EditText editText=(EditText)(findViewById(R.id.itemName));
+        //EditText editText=(EditText)(findViewById(R.id.itemName));
 
     }
 

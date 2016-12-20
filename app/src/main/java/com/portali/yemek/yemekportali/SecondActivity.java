@@ -3,6 +3,7 @@ package com.portali.yemek.yemekportali;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.text.Layout;
@@ -38,6 +39,9 @@ import static java.util.Objects.hash;
 
 public class SecondActivity extends Activity {
 
+    DatabaseHelper helper;
+    SQLiteDatabase db;
+
     private int countL=0;
     private int countC=0;
 
@@ -45,6 +49,10 @@ public class SecondActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.second_activity);
+
+        helper=new DatabaseHelper(this);
+        db=helper.getWritableDatabase();
+
         Intent activityThatCalled=getIntent();
 
         TabHost th =(TabHost) findViewById(R.id.tabhost);
@@ -85,12 +93,18 @@ public class SecondActivity extends Activity {
     }
 
     public void addGroceries(View view) {
+
+        int state=0;
+
         String s1;
         s1="i"+countC;
         int i=hash(s1);
         String s2;
         s2="l"+countC;
         int l=hash(s2);
+        String s3;
+        s3="e"+countC;
+        int e=hash(s2);
 
         LinearLayout linearLayout=(LinearLayout) (findViewById(R.id.layout));
 
@@ -107,6 +121,7 @@ public class SecondActivity extends Activity {
 
 
         EditText editText=new EditText(this);
+        editText.setId(e);
         CheckBox checkBox=new CheckBox(this);
         checkBox.setId(i);
 
@@ -124,13 +139,25 @@ public class SecondActivity extends Activity {
         countC++;
         countL++;
 
+        if(checkBox.isChecked()) {
+            state = 1;
+        }
+
+
+
+        helper.insertGrocery(db,editText.getText().toString(),state);
+
+
 
     }
 
     public void deleteGroceries(View view) {
         String s1;
-
         String s2;
+        String s3;
+
+        LinearLayout linearLayout;
+        EditText editText;
 
 
         for(int k =0;k<countC;k++){
@@ -141,7 +168,12 @@ public class SecondActivity extends Activity {
             if(checkBox.isChecked()) {
                 s2="l"+k;
                 int l=hash(s2);
-                int res2ID = getResources().getIdentifier("l"+k, "id2", getPackageName());
+                s3="e"+k;
+                int e=hash(s2);
+
+                editText=(EditText)findViewById(e);
+                helper.deleteGrocery(db,editText.getText().toString());
+
                 View myView = findViewById(l);
                 ViewGroup parent = (ViewGroup) myView.getParent();
                 parent.removeView(myView);

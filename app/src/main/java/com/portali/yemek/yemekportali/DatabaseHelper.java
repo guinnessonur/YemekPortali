@@ -24,6 +24,14 @@ public class DatabaseHelper extends SQLiteOpenHelper  {
         db.execSQL("CREATE TABLE GROCERYLIST (_id INTEGER PRIMARY KEY AUTOINCREMENT "+
         "element TEXT, "+
         "state INTEGER);");
+        db.execSQL("CREATE TABLE MEAL (id INTEGER PRIMARY KEY "+
+                "name TEXT, "+
+                "recipe TEXT, "+
+                "time INTEGER, "+
+                "ingredients TEXT, "+
+                "type TEXT);");
+        db.execSQL("CREATE TABLE FAVORITES (mealid INTEGER PRIMARY KEY "+
+                "time INTEGER);");
 
     }
 

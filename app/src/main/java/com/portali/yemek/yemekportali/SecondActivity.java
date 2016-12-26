@@ -63,13 +63,19 @@ public class SecondActivity extends Activity {
             //Shared Recipeleri gostert
         }
         else{
-            TextView text = new TextView(this);
-            text.setText("not Hello");
-            layout.addView(text);
-            layout.addView(text);
-            layout.addView(text);
-            layout.addView(text);
-            //Shared olmayan Recipleri gostert
+            Cursor cursor = helper.showMeals(db, contex);
+            cursor.moveToFirst();
+            for(int i = 0; i < cursor.getCount(); i++){
+                String name = cursor.getString(0);
+                String recipe = cursor.getString(1);
+                int time = Integer.parseInt(cursor.getString(2));
+                String ingredients = cursor.getString(3);
+                String type = cursor.getString(4); // Do nothing with it
+                TextView tv = new TextView(this);
+                tv.setText(name + " " + recipe + " " + time + " " + ingredients);
+                layout.addView(tv);
+                cursor.moveToNext();
+            }
         }
     }
 
@@ -110,6 +116,8 @@ public class SecondActivity extends Activity {
         specs.setIndicator("Favorites");
         th.addTab(specs);
 
+        showRecipe(0);
+
         ImageButton imgBtn = (ImageButton) findViewById(R.id.addRecipeButton);
         imgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +132,7 @@ public class SecondActivity extends Activity {
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                showRecipe(position);
             }
 
             @Override

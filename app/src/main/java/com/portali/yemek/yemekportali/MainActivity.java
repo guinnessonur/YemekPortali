@@ -27,7 +27,7 @@ public class MainActivity extends Activity {
             startActivity(intent);
         }
         else{
-            error_box.setText("shithead");
+            error_box.setText("wrong pass");
         }
     }
 }

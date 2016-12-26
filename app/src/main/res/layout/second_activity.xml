@@ -101,34 +101,6 @@
                         android:layout_height="wrap_content"
                         android:onClick="randomizer"/>
                 </LinearLayout>
-
-                <!--LinearLayout
-                    android:id="@+id/tab3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/itemName"/>
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:text="@string/not_ekle"
-                        android:onClick="addGroceries"/>
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:text="@string/not_sil"
-                        android:onClick="deleteGroceries"/>
-                    <ScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/not"
-                        android:entries="@array/options"/>
-                </LinearLayout-->
                 <LinearLayout
                     android:background="#f2ede6"
                     android:id="@+id/tab3"
@@ -143,7 +115,6 @@
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-
                         <Button
                             android:onClick="show"
                             android:text="My List"
@@ -171,16 +142,9 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/layout"
                             android:orientation="vertical">
-
-
                         </LinearLayout>
-
-
                     </ScrollView>
-
                 </LinearLayout>
-
-
                 <LinearLayout
                     android:background="#f2ede6"
                     android:id="@+id/tab4"
@@ -210,7 +174,6 @@
                             android:layout_height="wrap_content"
                             android:src="@android:drawable/btn_star_big_on"/>
                     </LinearLayout>
-
                 </LinearLayout>
             </FrameLayout>
         </LinearLayout>

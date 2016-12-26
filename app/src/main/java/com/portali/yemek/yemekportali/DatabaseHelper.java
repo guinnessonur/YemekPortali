@@ -43,8 +43,21 @@ public class DatabaseHelper extends SQLiteOpenHelper  {
         contactValues.put("state",state);
         db.insert("GROCERYLIST",null,contactValues);
     }
-    public static Cursor showItems(SQLiteDatabase db,Context context ){
+    public static void insertMeal(SQLiteDatabase db, String name, String recipe, int time, String ingredients, String type){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("name", name);
+        contentValues.put("recipe", recipe);
+        contentValues.put("time", time);
+        contentValues.put("ingredients", ingredients);
+        contentValues.put("type", type);
+        db.insert("MEAL", null, contentValues);
+    }
+    public static Cursor showItems(SQLiteDatabase db, Context context){
         cursor=db.query("GROCERYLIST",new String[]{"element","state"},null,null,null,null,null);
+        return cursor;
+    }
+    public static Cursor showMeals(SQLiteDatabase db, Context context){
+        cursor = db.query("MEAL", new String[]{"name", "recipe", "time", "ingredients", "type"}, null, null, null, null, null);
         return cursor;
     }
     public void update(SQLiteDatabase db,String element,String state,int phoneNumber){

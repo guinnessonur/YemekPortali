@@ -33,6 +33,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import static android.R.attr.content;
 import static android.R.attr.height;
 import static android.R.attr.id;
 import static android.R.attr.width;
@@ -86,8 +87,10 @@ public class SecondActivity extends Activity {
                 l3.setOrientation(LinearLayout.VERTICAL);
                 LinearLayout l4 = new LinearLayout(this);
                 l4.setOrientation(LinearLayout.VERTICAL);
-                RelativeLayout.LayoutParams rightParam = new RelativeLayout.LayoutParams(140, 140);
-                RelativeLayout.LayoutParams leftParam = new RelativeLayout.LayoutParams(280, WRAP_CONTENT);
+                int imageDp = (int) getResources().getDimension(R.dimen.dpImage);
+                int textDp = (int) getResources().getDimension(R.dimen.dpText);
+                RelativeLayout.LayoutParams rightParam = new RelativeLayout.LayoutParams(imageDp, imageDp);
+                RelativeLayout.LayoutParams leftParam = new RelativeLayout.LayoutParams(textDp, WRAP_CONTENT);
                 rightParam.addRule(RelativeLayout.ALIGN_PARENT_END);
                 TextView nameText = new TextView(this);
                 nameText.setText("Ingredients: " +  ingredients);
@@ -103,8 +106,8 @@ public class SecondActivity extends Activity {
                     img.setImageResource(R.drawable.eclair);
                 else
                     img.setImageResource(R.drawable.chicken);
-                img.setMaxHeight(WRAP_CONTENT);
-                img.setMaxWidth(140);
+                img.setMaxHeight(imageDp);
+                img.setMaxWidth(imageDp);
                 l4.addView(img);
                 l3.setLayoutParams(leftParam);
                 l4.setLayoutParams(rightParam);
@@ -114,10 +117,6 @@ public class SecondActivity extends Activity {
                 cursor.moveToNext();
             }
         }
-    }
-
-    public void addRecipe(int position){
-
     }
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,7 +152,7 @@ public class SecondActivity extends Activity {
         specs.setIndicator("Favorites");
         th.addTab(specs);
 
-        showRecipe(0);
+        showRecipe(1);
 
         ImageButton imgBtn = (ImageButton) findViewById(R.id.addRecipeButton);
         imgBtn.setOnClickListener(new View.OnClickListener() {

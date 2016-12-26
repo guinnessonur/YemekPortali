@@ -18,9 +18,11 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TabHost;
@@ -58,7 +60,7 @@ public class SecondActivity extends Activity {
         layout.removeAllViews();
         if(x==0){
             TextView text = new TextView(this);
-            text.setText("Hello");
+            text.setText("No MySQL Connection! ;-(");
             layout.addView(text);
             //Shared Recipeleri gostert
         }
@@ -71,9 +73,44 @@ public class SecondActivity extends Activity {
                 int time = Integer.parseInt(cursor.getString(2));
                 String ingredients = cursor.getString(3);
                 String type = cursor.getString(4); // Do nothing with it
-                TextView tv = new TextView(this);
-                tv.setText(name + " " + recipe + " " + time + " " + ingredients);
-                layout.addView(tv);
+                LinearLayout l1 = new LinearLayout(this);
+                TextView t1 = new TextView(this);
+                ImageButton i1 = new ImageButton(this); // Star button will be
+                l1.setOrientation(HORIZONTAL);
+                t1.setTextSize(18);
+                t1.setText(name);
+                l1.addView(t1);
+                layout.addView(l1);
+                RelativeLayout l2 = new RelativeLayout(this);
+                LinearLayout l3 = new LinearLayout(this);
+                l3.setOrientation(LinearLayout.VERTICAL);
+                LinearLayout l4 = new LinearLayout(this);
+                l4.setOrientation(LinearLayout.VERTICAL);
+                RelativeLayout.LayoutParams rightParam = new RelativeLayout.LayoutParams(140, 140);
+                RelativeLayout.LayoutParams leftParam = new RelativeLayout.LayoutParams(280, WRAP_CONTENT);
+                rightParam.addRule(RelativeLayout.ALIGN_PARENT_END);
+                TextView nameText = new TextView(this);
+                nameText.setText("Ingredients: " +  ingredients);
+                l3.addView(nameText);
+                TextView timeText = new TextView(this);
+                timeText.setText("Preperation Time: " + time);
+                l3.addView(timeText);
+                TextView recipeText = new TextView(this);
+                recipeText.setText(recipe);
+                l3.addView(recipeText);
+                ImageView img = new ImageView(this);
+                if(name.equalsIgnoreCase("eclair"))
+                    img.setImageResource(R.drawable.eclair);
+                else
+                    img.setImageResource(R.drawable.chicken);
+                img.setMaxHeight(WRAP_CONTENT);
+                img.setMaxWidth(140);
+                l4.addView(img);
+                l3.setLayoutParams(leftParam);
+                l4.setLayoutParams(rightParam);
+                l2.addView(l3);
+                l2.addView(l4);
+                layout.addView(l2);
                 cursor.moveToNext();
             }
         }

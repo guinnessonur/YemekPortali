@@ -19,10 +19,22 @@ public class MainActivity extends Activity {
 
 
     public void loginAttempt(View view) {
-        EditText username= (EditText)findViewById(R.id.user_name);
-        EditText password= (EditText)findViewById(R.id.user_password);
+        EditText username2= (EditText)findViewById(R.id.user_name);
+        EditText password2= (EditText)findViewById(R.id.user_password);
         TextView error_box= (TextView)findViewById(R.id.error_box);
-        if(username.getText().toString().equals("")&&password.getText().toString().equals("")){
+
+        String username=username2.getText().toString();
+        String password=password2.getText().toString();
+
+
+        String type="login";
+
+//        OnlineConnection onlineConnection=new OnlineConnection(this);
+//        onlineConnection.execute(type,username,password);
+
+
+
+        if(username2.getText().toString().equals("")&&password2.getText().toString().equals("")){
             Intent intent =new Intent(this,SecondActivity.class);
             startActivity(intent);
         }

@@ -64,6 +64,6 @@ public class DatabaseHelper extends SQLiteOpenHelper  {
         db.execSQL("Update GROCERYLIST SET element='"+element+"', state = '"+state+"' WHERE phoneNumber="+phoneNumber+" ;");
     }
     public static void deleteGrocery(SQLiteDatabase db,String element){
-        db.execSQL("delete from "+"GROCERYLIST"+" where "+element+" ='"+element+"'");
+        db.execSQL("delete from "+"GROCERYLIST"+" where element ='"+element+"'");
     }
 }

@@ -42,4 +42,10 @@ public class MainActivity extends Activity {
             error_box.setText("wrong pass");
         }
     }
+
+    public void register(View view) {
+        Intent intent =new Intent(this,RegisterActivity.class);
+        startActivity(intent);
+
+    }
 }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -15,7 +16,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-    //Hello world]asgasg
+
 
 
     public void loginAttempt(View view) {
@@ -29,18 +30,9 @@ public class MainActivity extends Activity {
 
         String type="login";
 
-//        OnlineConnection onlineConnection=new OnlineConnection(this);
-//        onlineConnection.execute(type,username,password);
+        OnlineConnection onlineConnection=new OnlineConnection(this);
+        onlineConnection.execute(type,username,password);
 
-
-
-        if(username2.getText().toString().equals("")&&password2.getText().toString().equals("")){
-            Intent intent =new Intent(this,SecondActivity.class);
-            startActivity(intent);
-        }
-        else{
-            error_box.setText("wrong pass");
-        }
     }
 
     public void register(View view) {

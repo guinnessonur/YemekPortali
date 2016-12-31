@@ -21,12 +21,15 @@ import java.net.URLEncoder;
  * Created by GURKAN32 on 12/27/2016.
  */
 
+
 public class OnlineConnection extends AsyncTask<String,Void,String> {
     Context context;
     AlertDialog alertDialog;
     OnlineConnection (Context ctx){
         context=ctx;
     }
+
+
 
 
     @Override
@@ -105,8 +108,7 @@ public class OnlineConnection extends AsyncTask<String,Void,String> {
                 inputStream.close();
                 httpURLConnection.disconnect();
 
-//                Intent intent =new Intent(OnlineConnection.this.getClass(),SecondActivity.class);
-//                startActivity(intent);
+
 
                 return result;
 
@@ -128,8 +130,14 @@ public class OnlineConnection extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPostExecute(String result) {
-        alertDialog.setMessage(result);
-        alertDialog.show();
+        if(result.equals(" login success")){
+            Intent i = new Intent(context,SecondActivity.class);
+            context.startActivity(i);
+        }
+        else {
+            alertDialog.setMessage(result);
+            alertDialog.show();
+        }
     }
 
     @Override

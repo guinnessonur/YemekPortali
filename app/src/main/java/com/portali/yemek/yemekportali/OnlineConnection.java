@@ -28,7 +28,8 @@ public class OnlineConnection extends AsyncTask<String,Void,String> {
     OnlineConnection (Context ctx){
         context=ctx;
     }
-
+    int uid;
+    int mid;
 
 
 
@@ -78,6 +79,7 @@ public class OnlineConnection extends AsyncTask<String,Void,String> {
                 String user_name= params[1];
                 String user_password= params[2];
                 String user_mail= params[3];
+                uid=Math.abs(user_name.hashCode());
                 URL url=new URL(register_url);
                 HttpURLConnection httpURLConnection=(HttpURLConnection)url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -86,7 +88,8 @@ public class OnlineConnection extends AsyncTask<String,Void,String> {
                 OutputStream outputStream=httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter=new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
                 String post_data=
-                        URLEncoder.encode("user_name","UTF-8")+"="+URLEncoder.encode(user_name,"UTF-8")+"&"
+                        URLEncoder.encode("user_id","UTF-8")+"="+URLEncoder.encode(Integer.toString(uid),"UTF-8")+"&"
+                        +URLEncoder.encode("user_name","UTF-8")+"="+URLEncoder.encode(user_name,"UTF-8")+"&"
                         +URLEncoder.encode("user_password","UTF-8")+"="+URLEncoder.encode(user_password,"UTF-8")+"&"
                         +URLEncoder.encode("user_mail","UTF-8")+"="+URLEncoder.encode(user_mail,"UTF-8");
                 bufferedWriter.write(post_data);

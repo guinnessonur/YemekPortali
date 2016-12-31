@@ -52,6 +52,7 @@ public class SecondActivity extends Activity {
     SQLiteDatabase db;
 
     String list_url="http://10.0.2.2/list.php";
+    int position1;
 
     private int countL=0;
     private int countC=0;
@@ -160,8 +161,14 @@ public class SecondActivity extends Activity {
         imgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bad_intent = new Intent(SecondActivity.this, AddRecipe.class);
-                startActivity(bad_intent);
+                if(position1==1){
+                    Intent bad_intent = new Intent(SecondActivity.this, AddRecipe.class);
+                    startActivity(bad_intent);
+                }
+                else{
+                    Intent bad_intent = new Intent(SecondActivity.this, AddRecipeMySQL.class);
+                    startActivity(bad_intent);
+                }
             }
         });
 
@@ -171,6 +178,7 @@ public class SecondActivity extends Activity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 showRecipe(position);
+                position1=position;
             }
 
             @Override

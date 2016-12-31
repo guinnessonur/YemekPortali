@@ -22,7 +22,8 @@
             android:label="Ana Ekran"
             android:theme="@style/AppTheme" />
         <activity android:name=".AddRecipe" />
-        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".AddRecipeMySQL"></activity>
     </application>
 
 </manifest>

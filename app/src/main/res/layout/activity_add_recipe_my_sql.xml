@@ -10,7 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     tools:context="com.portali.yemek.yemekportali.AddRecipe">
-
     <LinearLayout
         android:layout_margin="8dp"
         android:layout_width="match_parent"
@@ -98,7 +97,7 @@
         android:text="Done!"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
+        android:layout_height="wrap_content"
+        android:onClick="addRecipe"/>
 
 </LinearLayout>

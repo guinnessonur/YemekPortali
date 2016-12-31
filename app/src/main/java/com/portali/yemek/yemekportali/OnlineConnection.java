@@ -65,9 +65,6 @@ public class OnlineConnection extends AsyncTask<String,Void,String> {
                 inputStream.close();
                 httpURLConnection.disconnect();
 
-//                Intent intent =new Intent(OnlineConnection.this.getClass(),SecondActivity.class);
-//                startActivity(intent);
-
                 return result;
 
             } catch (MalformedURLException e) {

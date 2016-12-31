@@ -51,6 +51,8 @@ public class SecondActivity extends Activity {
     DatabaseHelper helper;
     SQLiteDatabase db;
 
+    String list_url="http://10.0.2.2/list.php";
+
     private int countL=0;
     private int countC=0;
 
@@ -266,9 +268,10 @@ public class SecondActivity extends Activity {
     }
 
     public void randomizer(View view) {
-        Random r=new Random();
-        int x=r.nextInt(5);
         TextView textView=(TextView)findViewById(R.id.random);
-        textView.setText(x+"");
+
+        ListView lv= (ListView) findViewById(R.id.lv);
+        OnlineConnectionTwo onlineConnectionTwo=new OnlineConnectionTwo(this,list_url,lv);
+        onlineConnectionTwo.execute();
     }
 }

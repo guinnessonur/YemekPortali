@@ -31,6 +31,7 @@ public class DatabaseHelper extends SQLiteOpenHelper  {
                 "type TEXT);");
         db.execSQL("CREATE TABLE FAVORITES (mealid INTEGER PRIMARY KEY, "+
                 "time INTEGER);");
+        db.execSQL("CREATE TABLE IMAGES (img blob)");
     }
 
     @Override
@@ -66,4 +67,5 @@ public class DatabaseHelper extends SQLiteOpenHelper  {
     public static void deleteGrocery(SQLiteDatabase db,String element){
         db.execSQL("delete from "+"GROCERYLIST"+" where element ='"+element+"'");
     }
+
 }

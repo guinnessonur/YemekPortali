@@ -104,12 +104,28 @@
             android:id="@+id/rating"
             android:textSize="14sp"
             android:inputType="number"
-            android:hint="Give a rating between 1 and 5"
+            android:hint="Give a rating between 1 and 10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
     <LinearLayout
-        android:layout_margin="8dp"
+        android:layout_margin="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="14sp"
+            android:text="Enter Username "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/enterusername"
+            android:textSize="14sp"
+            android:hint="Enter Your Username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_margin="1dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView

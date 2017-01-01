@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -127,7 +128,10 @@ public class OnlineConnection extends AsyncTask<String,Void,String> {
                 String rating= params[4];
                 String ingredients= params[5];
                 String typeM= params[6];
+                String userId=params[7];
+
                 mid=Math.abs(name.hashCode());
+                uid=Math.abs(userId.hashCode());
 
                 URL url=new URL(addMeal_url);
                 HttpURLConnection httpURLConnection=(HttpURLConnection)url.openConnection();
@@ -136,6 +140,7 @@ public class OnlineConnection extends AsyncTask<String,Void,String> {
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream=httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter=new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
+
                 String post_data=
                         URLEncoder.encode("meal_id","UTF-8")+"="+URLEncoder.encode(Integer.toString(mid),"UTF-8")+"&"
                                 +URLEncoder.encode("meal_name","UTF-8")+"="+URLEncoder.encode(name,"UTF-8")+"&"

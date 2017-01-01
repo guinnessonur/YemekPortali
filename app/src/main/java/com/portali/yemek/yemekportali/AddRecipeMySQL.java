@@ -20,6 +20,7 @@ public class AddRecipeMySQL extends AppCompatActivity {
         EditText editText4=(EditText)findViewById(R.id.rating);
         EditText editText5=(EditText)findViewById(R.id.newIng);
         EditText editText6=(EditText)findViewById(R.id.type);
+        EditText editText7=(EditText)findViewById(R.id.enterusername);
 
         String name=editText1.getText().toString();
         String recipe=editText2.getText().toString();
@@ -27,11 +28,12 @@ public class AddRecipeMySQL extends AppCompatActivity {
         String rating=editText4.getText().toString();
         String ingredients=editText5.getText().toString();
         String typeM=editText6.getText().toString();
+        String enterusername=editText7.getText().toString();
 
 
         String type="addMeal";
 
         OnlineConnection onlineConnection=new OnlineConnection(this);
-        onlineConnection.execute(type,name,recipe,time,rating,ingredients,typeM);
+        onlineConnection.execute(type,name,recipe,time,rating,ingredients,typeM,enterusername);
     }
 }

@@ -8,23 +8,30 @@ import android.widget.Toast;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 
 
 /**
  * Created by GURKAN32 on 12/31/2016.
  */
 
-public class OnlineConnectionTwo extends AsyncTask<Void,Integer,String> {
+public class OnlineConnectionTwo extends AsyncTask<String,Integer,String> {
     Context c;
     String address;
     ListView lv;
     ProgressDialog pd;
+    String typeOfMeal;
+
+
     public OnlineConnectionTwo(Context c, String address, ListView lv) {
         this.c = c;
         this.address = address;
@@ -40,8 +47,10 @@ public class OnlineConnectionTwo extends AsyncTask<Void,Integer,String> {
         pd.show();
     }
     @Override
-    protected String doInBackground(Void... params) {
-        String data=downloadData();
+    protected String doInBackground(String... params) {
+        typeOfMeal= params[0];
+
+        String data=downloadData(typeOfMeal );
         return data;
     }
     @Override
@@ -57,7 +66,7 @@ public class OnlineConnectionTwo extends AsyncTask<Void,Integer,String> {
             Toast.makeText(c,"Unable to download data",Toast.LENGTH_SHORT).show();
         }
     }
-    private String downloadData()
+    private String downloadData(String typeOfMeal)
     {
         //connect and get a stream
         InputStream is=null;
@@ -65,6 +74,16 @@ public class OnlineConnectionTwo extends AsyncTask<Void,Integer,String> {
         try {
             URL url=new URL(address);
             HttpURLConnection con= (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("POST");
+            con.setDoOutput(true);
+            con.setDoInput(true);
+            OutputStream outputStream=con.getOutputStream();
+            BufferedWriter bufferedWriter=new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
+            String post_data= URLEncoder.encode("type_meal","UTF-8")+"="+URLEncoder.encode(typeOfMeal,"UTF-8");
+            bufferedWriter.write(post_data);
+            bufferedWriter.flush();
+            bufferedWriter.close();
+            outputStream.close();
             is=new BufferedInputStream(con.getInputStream());
             BufferedReader br=new BufferedReader(new InputStreamReader(is));
             StringBuffer sb=new StringBuffer();

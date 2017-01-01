@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 public class AddRecipeMySQL extends AppCompatActivity {
 
@@ -19,7 +20,7 @@ public class AddRecipeMySQL extends AppCompatActivity {
         EditText editText3=(EditText)findViewById(R.id.newTime);
         EditText editText4=(EditText)findViewById(R.id.rating);
         EditText editText5=(EditText)findViewById(R.id.newIng);
-        EditText editText6=(EditText)findViewById(R.id.type);
+        Spinner editText6=  (Spinner) findViewById(R.id.type);
         EditText editText7=(EditText)findViewById(R.id.enterusername);
 
         String name=editText1.getText().toString();
@@ -27,7 +28,7 @@ public class AddRecipeMySQL extends AppCompatActivity {
         String time=editText3.getText().toString();
         String rating=editText4.getText().toString();
         String ingredients=editText5.getText().toString();
-        String typeM=editText6.getText().toString();
+        String typeM=String.valueOf(editText6.getSelectedItem());
         String enterusername=editText7.getText().toString();
 
 

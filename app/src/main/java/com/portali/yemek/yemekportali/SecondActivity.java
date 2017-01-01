@@ -277,9 +277,11 @@ public class SecondActivity extends Activity {
 
     public void randomizer(View view) {
         TextView textView=(TextView)findViewById(R.id.random);
+        Spinner spinner=(Spinner)findViewById(R.id.typeMeal);
+        String typeM=String.valueOf(spinner.getSelectedItem());
 
         ListView lv= (ListView) findViewById(R.id.lv);
         OnlineConnectionTwo onlineConnectionTwo=new OnlineConnectionTwo(this,list_url,lv);
-        onlineConnectionTwo.execute();
+        onlineConnectionTwo.execute(typeM);
     }
 }

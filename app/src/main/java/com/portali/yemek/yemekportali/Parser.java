@@ -80,7 +80,7 @@ public class Parser extends AsyncTask<Void,Integer,Integer> {
             {
                 jo=ja.getJSONObject(i);
                 //RETRIOEVE NAME
-                String name=jo.getString("username");
+                String name=jo.getString("name");
                 //ADD IT TO OUR ARRAYLIST
                 players.add(name);
             }

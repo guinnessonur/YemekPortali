@@ -84,12 +84,16 @@
             android:text="Type: "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <EditText
+        <Spinner
+            android:layout_margin="20dp"
+            android:layout_gravity="center"
+            android:entries="@array/type"
             android:id="@+id/type"
-            android:textSize="14sp"
-            android:hint="Enter Meal Type"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            >
+
+        </Spinner>
     </LinearLayout>
     <LinearLayout
         android:layout_margin="2dp"

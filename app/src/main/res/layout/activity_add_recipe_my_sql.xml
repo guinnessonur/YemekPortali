@@ -11,7 +11,7 @@
     android:orientation="vertical"
     tools:context="com.portali.yemek.yemekportali.AddRecipe">
     <LinearLayout
-        android:layout_margin="8dp"
+        android:layout_margin="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
     <LinearLayout
-        android:layout_margin="8dp"
+        android:layout_margin="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
     <LinearLayout
-        android:layout_margin="8dp"
+        android:layout_margin="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
@@ -59,7 +59,7 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
     <LinearLayout
-        android:layout_margin="8dp"
+        android:layout_margin="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
     <LinearLayout
-        android:layout_margin="8dp"
+        android:layout_margin="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
@@ -92,7 +92,7 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
     <LinearLayout
-        android:layout_margin="8dp"
+        android:layout_margin="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
@@ -109,7 +109,7 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
     <LinearLayout
-        android:layout_margin="1dp"
+        android:layout_margin="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
@@ -125,7 +125,7 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
     <LinearLayout
-        android:layout_margin="1dp"
+        android:layout_margin="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView

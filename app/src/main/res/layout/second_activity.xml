@@ -40,13 +40,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+
                     <RelativeLayout
                         android:background="#f4f3ef"
                         android:layout_width="match_parent"
                         android:layout_height="50dp">
                         <Spinner
                             android:id="@+id/spinna"
-                            android:layout_width="300dp"
+                            android:layout_width="250dp"
                             android:layout_height="match_parent"
                             android:textAlignment="center"
                             android:entries="@array/forum">
@@ -56,10 +57,11 @@
                             android:layout_centerInParent="true"
                             android:background="#f4f3ef"
                             android:layout_alignParentEnd="true"
-                            android:src="@android:drawable/ic_input_add"
-                            android:layout_width="30dp"
+                            android:src="@drawable/share"
+                            android:layout_width="60dp"
                             android:layout_height="30dp" />
                     </RelativeLayout>
+
                     <ScrollView
                         android:layout_marginRight="20dp"
                         android:layout_marginLeft="20dp"
@@ -96,11 +98,11 @@
                         android:id="@+id/typeMeal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"></Spinner>
-                    <Button
-                        android:text="Mealize"
+                    <ImageButton
+                        android:background="@drawable/mealize"
                         android:layout_gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="135dp"
+                        android:layout_height="65dp"
                         android:onClick="randomizer"/>
                     <ListView
                         android:layout_width="match_parent"

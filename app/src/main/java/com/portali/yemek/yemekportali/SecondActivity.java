@@ -13,10 +13,12 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,6 +29,7 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,6 +55,8 @@ public class SecondActivity extends Activity {
     SQLiteDatabase db;
 
     String list_url="http://10.0.2.2/list.php";
+    String listMeals_url="http://10.0.2.2/listMeal.php";
+
     int position1;
 
     private int countL=0;
@@ -63,12 +68,16 @@ public class SecondActivity extends Activity {
         LinearLayout layout = (LinearLayout) findViewById(R.id.recipes);
         layout.removeAllViews();
         if(x==0){
-            TextView text = new TextView(this);
-            text.setText("No MySQL Connection! ;-(");
-            layout.addView(text);
-            //Shared Recipeleri gostert
+
+            ListView lv2= new ListView(this);
+
+            OnlineConnectionThree onlineConnectionThree=new OnlineConnectionThree(this,listMeals_url,lv2);
+            onlineConnectionThree.execute();
+
+
         }
         else{
+
             Cursor cursor = helper.showMeals(db, contex);
             cursor.moveToFirst();
             for(int i = 0; i < cursor.getCount(); i++){

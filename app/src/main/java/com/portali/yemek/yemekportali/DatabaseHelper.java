@@ -28,10 +28,11 @@ public class DatabaseHelper extends SQLiteOpenHelper  {
                 "recipe TEXT, "+
                 "time INTEGER, "+
                 "ingredients TEXT, "+
-                "type TEXT);");
+                "type TEXT, "+
+                "path TEXT);");
         db.execSQL("CREATE TABLE FAVORITES (mealid INTEGER PRIMARY KEY, "+
                 "time INTEGER);");
-        db.execSQL("CREATE TABLE IMAGES (img blob)");
+
     }
 
     @Override
@@ -44,13 +45,14 @@ public class DatabaseHelper extends SQLiteOpenHelper  {
         contactValues.put("state",state);
         db.insert("GROCERYLIST",null,contactValues);
     }
-    public static void insertMeal(SQLiteDatabase db, String name, String recipe, int time, String ingredients, String type){
+    public static void insertMeal(SQLiteDatabase db, String name, String recipe, int time, String ingredients, String type,String path){
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", name);
         contentValues.put("recipe", recipe);
         contentValues.put("time", time);
         contentValues.put("ingredients", ingredients);
         contentValues.put("type", type);
+        contentValues.put("path", path);
         db.insert("MEAL", null, contentValues);
     }
     public static Cursor showItems(SQLiteDatabase db, Context context){
@@ -58,14 +60,14 @@ public class DatabaseHelper extends SQLiteOpenHelper  {
         return cursor;
     }
     public static Cursor showMeals(SQLiteDatabase db, Context context){
-        cursor = db.query("MEAL", new String[]{"name", "recipe", "time", "ingredients", "type"}, null, null, null, null, null);
+        cursor = db.query("MEAL", new String[]{"name", "recipe", "time", "ingredients", "type","path"}, null, null, null, null, null);
         return cursor;
     }
     public void update(SQLiteDatabase db,String element,String state,int phoneNumber){
         db.execSQL("Update GROCERYLIST SET element='"+element+"', state = '"+state+"' WHERE phoneNumber="+phoneNumber+" ;");
     }
     public static void deleteGrocery(SQLiteDatabase db,String element){
-        db.execSQL("delete from "+"GROCERYLIST"+" where element ='"+element+"'");
+        db.execSQL("delete from "+"GROCERYLIST"+" where element = '"+element+"' ;");
     }
 
 }

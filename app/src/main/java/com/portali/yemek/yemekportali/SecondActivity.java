@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.text.Layout;
@@ -73,6 +74,7 @@ public class SecondActivity extends Activity {
 
             OnlineConnectionThree onlineConnectionThree=new OnlineConnectionThree(this,listMeals_url,lv2);
             onlineConnectionThree.execute();
+            layout.addView(lv2);
 
 
         }
@@ -114,10 +116,9 @@ public class SecondActivity extends Activity {
                 recipeText.setText(recipe);
                 l3.addView(recipeText);
                 ImageView img = new ImageView(this);
-                if(name.equalsIgnoreCase("eclair"))
-                    img.setImageResource(R.drawable.eclair);
-                else
-                    img.setImageResource(R.drawable.chicken);
+                img.setImageURI(Uri.parse(cursor.getString(5)));
+
+
                 img.setMaxHeight(imageDp);
                 img.setMaxWidth(imageDp);
                 l4.addView(img);
@@ -265,15 +266,19 @@ public class SecondActivity extends Activity {
             if(checkBox.isChecked()) {
                 s2="l"+k;
                 int l=hash(s2);
-                s3="e"+k;
-                int e=hash(s2);
 
-                //editText=(EditText)findViewById(e);
-                //helper.deleteGrocery(db,editText.getText().toString());
+                s3="e"+k;
+                int e=hash(s3);
+
+                editText=(EditText)findViewById(e);
+                helper.deleteGrocery(db,editText.getText().toString());
 
                 View myView = findViewById(l);
                 ViewGroup parent = (ViewGroup) myView.getParent();
                 parent.removeView(myView);
+
+                countC--;
+                countL--;
 
             }
         }
@@ -281,7 +286,50 @@ public class SecondActivity extends Activity {
 
     public void show(View view) {
         Cursor cursor = helper.showItems(db, getApplicationContext());
-        Log.v("tag", "" + cursor.getCount());
+        cursor.moveToFirst();
+        for(int j = 0; j < cursor.getCount(); j++){
+            String element = cursor.getString(0);
+            String state2 = cursor.getString(1);
+            int state=Integer.parseInt(state2);
+
+            String s1;
+            s1="i"+countC;
+            int i=hash(s1);
+            String s2;
+            s2="l"+countC;
+            int l=hash(s2);
+            String s3;
+            s3="e"+countC;
+            int e=hash(s3);
+
+            LinearLayout linearLayout=(LinearLayout) (findViewById(R.id.layout));
+
+            LinearLayout.LayoutParams lp1 = new LinearLayout.LayoutParams(MATCH_PARENT,WRAP_CONTENT);
+
+            LinearLayout linearLayout1=new LinearLayout(this);
+
+            linearLayout1.setOrientation(HORIZONTAL);
+            linearLayout1.setId(l);
+
+            EditText editText=new EditText(this);
+            editText.setId(e);
+            CheckBox checkBox=new CheckBox(this);
+            checkBox.setId(i);
+
+            LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(WRAP_CONTENT,WRAP_CONTENT);
+
+            linearLayout1.addView(checkBox,lp2);
+            linearLayout1.addView(editText,lp2);
+
+            linearLayout.addView(linearLayout1,lp1);
+
+            countC++;
+            countL++;
+
+            cursor.moveToNext();
+        }
+
+
     }
 
     public void randomizer(View view) {

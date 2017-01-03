@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridLayout;
@@ -62,6 +63,7 @@ public class SecondActivity extends Activity {
 
     private int countL=0;
     private int countC=0;
+    private int countB=0;
 
     static Context contex;
 
@@ -219,6 +221,9 @@ public class SecondActivity extends Activity {
         String s3;
         s3="e"+countC;
         int e=hash(s3);
+        String s4;
+        s4="b"+countC;
+        int b=hash(s4);
 
         LinearLayout linearLayout=(LinearLayout) (findViewById(R.id.layout));
 
@@ -226,39 +231,52 @@ public class SecondActivity extends Activity {
 
         LinearLayout linearLayout1=new LinearLayout(this);
 
-        linearLayout1.setOrientation(HORIZONTAL);
+        linearLayout1.setOrientation(LinearLayout.VERTICAL);
         linearLayout1.setId(l);
 
-        EditText editText=new EditText(this);
+
+        final EditText editText=new EditText(this);
         editText.setId(e);
         CheckBox checkBox=new CheckBox(this);
         checkBox.setId(i);
 
         LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(WRAP_CONTENT,WRAP_CONTENT);
 
-        linearLayout1.addView(checkBox,lp2);
-        linearLayout1.addView(editText,lp2);
-
-        linearLayout.addView(linearLayout1,lp1);
-
         countC++;
         countL++;
+        countB++;
 
         if(checkBox.isChecked()) {
             state = 1;
         }
-        helper.insertGrocery(db,editText.getText().toString(),state);
+        Button button=new Button(this);
+        button.setText("Add to list");
+        button.setId(b);
+        final int finalState = state;
+            button.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    helper.insertGrocery(db,editText.getText().toString(), finalState);
+                }
+        });
+
+        linearLayout1.addView(button,lp2);
+        linearLayout1.addView(checkBox,lp2);
+        linearLayout1.addView(editText,lp2);
+        linearLayout.addView(linearLayout1,lp1);
+
     }
 
     public void deleteGroceries(View view) {
-        String s1;
-        String s2;
-        String s3;
+
 
         LinearLayout linearLayout;
         EditText editText;
 
         for(int k =0;k<countC;k++){
+            String s1;
+            String s2;
+            String s3;
+            String s4;
             s1="i"+k;
             int i=hash(s1);
             CheckBox checkBox=(CheckBox)findViewById(i);
@@ -270,6 +288,9 @@ public class SecondActivity extends Activity {
                 s3="e"+k;
                 int e=hash(s3);
 
+                s4="b"+k;
+                int b=s4.hashCode();
+
                 editText=(EditText)findViewById(e);
                 helper.deleteGrocery(db,editText.getText().toString());
 
@@ -279,6 +300,7 @@ public class SecondActivity extends Activity {
 
                 countC--;
                 countL--;
+                countB--;
 
             }
         }
@@ -301,6 +323,9 @@ public class SecondActivity extends Activity {
             String s3;
             s3="e"+countC;
             int e=hash(s3);
+            String s4;
+            s4="b"+countC;
+            int b=hash(s3);
 
             LinearLayout linearLayout=(LinearLayout) (findViewById(R.id.layout));
 
@@ -311,20 +336,38 @@ public class SecondActivity extends Activity {
             linearLayout1.setOrientation(HORIZONTAL);
             linearLayout1.setId(l);
 
-            EditText editText=new EditText(this);
+
+            final EditText editText=new EditText(this);
             editText.setId(e);
+            editText.setText(element);
             CheckBox checkBox=new CheckBox(this);
             checkBox.setId(i);
+            if(state==1)
+                checkBox.setChecked(true);
+            else
+                checkBox.setChecked(false);
 
             LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(WRAP_CONTENT,WRAP_CONTENT);
 
-            linearLayout1.addView(checkBox,lp2);
-            linearLayout1.addView(editText,lp2);
-
-            linearLayout.addView(linearLayout1,lp1);
-
             countC++;
             countL++;
+            countB++;
+
+            Button button=new Button(this);
+            button.setText("Add to list");
+            button.setId(b);
+            final int finalState = state;
+            button.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Toast.makeText(contex,"Already added",Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            linearLayout1.addView(button,lp2);
+            linearLayout1.addView(checkBox,lp2);
+            linearLayout1.addView(editText,lp2);
+            linearLayout.addView(linearLayout1,lp1);
+
 
             cursor.moveToNext();
         }

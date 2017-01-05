@@ -40,8 +40,9 @@ public class CustomAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return meals.get(position).getTime();
+        return meals.get(position).getMid();
     }
+
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -50,13 +51,20 @@ public class CustomAdapter extends BaseAdapter {
             convertView=inflater.inflate(R.layout.model,parent,false);
         }
 
+
         TextView nameTxt= (TextView) convertView.findViewById(R.id.nameTxt);
         TextView propellantTxt= (TextView) convertView.findViewById(R.id.propellantTxt);
         TextView descTxt= (TextView) convertView.findViewById(R.id.descTxt);
+        TextView timeTxt= (TextView) convertView.findViewById(R.id.timeToCooky);
+        TextView ratingTxt= (TextView) convertView.findViewById(R.id.ratingForTheMeal);
+        TextView ingredientTxt= (TextView) convertView.findViewById(R.id.ingredient);
 
         nameTxt.setText(meals.get(position).getName());
         propellantTxt.setText(meals.get(position).getRecipe());
         descTxt.setText(meals.get(position).getType());
+        timeTxt.setText("Time "+Integer.toString(meals.get(position).getTime()));
+        ratingTxt.setText("Rating "+Integer.toString(meals.get(position).getRating()));
+        ingredientTxt.setText(meals.get(position).getIngredients());
 
         //ITEM CLICKS
         convertView.setOnClickListener(new View.OnClickListener() {

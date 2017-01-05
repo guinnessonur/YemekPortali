@@ -9,6 +9,7 @@ public class Meal {
     String recipe;
     int time;
     int rating;
+    int mid;
     String ingredients;
     String type;
 
@@ -58,5 +59,13 @@ public class Meal {
 
     public String getType() {
         return type;
+    }
+
+    public int getMid() {
+        return mid;
+    }
+
+    public void setMid(int mid) {
+        this.mid = mid;
     }
 }

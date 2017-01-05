@@ -79,11 +79,12 @@ public class ParserOne  extends AsyncTask<Void,Void,Integer>{
                 String recipe=jo.getString("recipe");
                 int time=jo.getInt("time");
                 int rating=jo.getInt("rating");
+                int mid=jo.getInt("mid");
                 String ingredients=jo.getString("ingredients");
                 String type=jo.getString("type");
 
 
-
+                s.setMid(mid);
                 s.setName(name);
                 s.setRecipe(recipe);
                 s.setTime(time);

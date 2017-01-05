@@ -138,12 +138,6 @@
             android:text="Choose an image: "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <ImageButton
-            android:scaleX="0.7"
-            android:scaleY="0.7"
-            android:src="@mipmap/ic_launcher"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <Button

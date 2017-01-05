@@ -28,10 +28,10 @@ public class MainActivity extends Activity {
         String password=password2.getText().toString();
 
 
-        //String type="login";
+        String type="login";
 
-        //OnlineConnection onlineConnection=new OnlineConnection(this);
-        //onlineConnection.execute(type,username,password);
+        OnlineConnection onlineConnection=new OnlineConnection(this);
+        onlineConnection.execute(type,username,password);
 
     }
 

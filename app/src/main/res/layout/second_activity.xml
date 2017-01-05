@@ -166,27 +166,12 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
                     <LinearLayout
+                        android:id="@+id/favLay"
                         android:layout_marginTop="20dp"
                         android:background="#f4f3ef"
-                        android:orientation="horizontal"
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-                        <TextView
-                            android:textSize="18sp"
-                            android:layout_margin="10dp"
-                            android:text="Éclair"
-                            android:layout_width="330dp"
-                            android:layout_gravity="center"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"/>
-                        <ImageButton
-                            android:background="#f4f3ef"
-                            android:layout_gravity="center"
-                            android:scaleX="0.7"
-                            android:scaleY="0.7"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@android:drawable/btn_star_big_on"/>
                     </LinearLayout>
                 </LinearLayout>
             </FrameLayout>

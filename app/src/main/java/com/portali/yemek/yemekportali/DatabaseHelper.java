@@ -39,6 +39,16 @@ public class DatabaseHelper extends SQLiteOpenHelper  {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
+    public static void insertFavorite(SQLiteDatabase db, int aydi, int time){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("mealid", aydi);
+        contentValues.put("time", time);
+        db.insert("FAVORITES", null, contentValues);
+    }
+    public static void deleteFavorite(SQLiteDatabase db, int aydi){
+        db.execSQL("DELETE FROM FAVORITES WHERE mealid = '" + aydi +"';");
+    }
+
     public static void insertGrocery(SQLiteDatabase db, String element,int state){
         ContentValues contactValues=new ContentValues();
         contactValues.put("element",element);
@@ -59,8 +69,12 @@ public class DatabaseHelper extends SQLiteOpenHelper  {
         cursor=db.query("GROCERYLIST",new String[]{"element","state"},null,null,null,null,null);
         return cursor;
     }
+    public static Cursor showFavorites(SQLiteDatabase db, Context context){
+        cursor = db.query("FAVORITES", new String[]{"mealid", "time"}, null, null, null, null, null);
+        return cursor;
+    }
     public static Cursor showMeals(SQLiteDatabase db, Context context){
-        cursor = db.query("MEAL", new String[]{"name", "recipe", "time", "ingredients", "type","path"}, null, null, null, null, null);
+        cursor = db.query("MEAL", new String[]{"name", "recipe", "time", "ingredients", "type","path", "id"}, null, null, null, null, null);
         return cursor;
     }
     public void update(SQLiteDatabase db,String element,String state,int phoneNumber){

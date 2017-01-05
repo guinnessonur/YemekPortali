@@ -6,48 +6,29 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Point;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.text.Layout;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.Date;
 
-import static android.R.attr.content;
-import static android.R.attr.height;
-import static android.R.attr.id;
-import static android.R.attr.width;
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static android.widget.LinearLayout.HORIZONTAL;
-import static java.util.Objects.hash;
 
 /**
  * Created by GURKAN32 on 10/21/2016.
@@ -69,21 +50,110 @@ public class SecondActivity extends Activity {
 
     static Context contex;
 
+    public void showFavorites(){
+        LinearLayout layout = (LinearLayout) findViewById(R.id.favLay);
+        layout.removeAllViews();
+        Cursor cursorMeals = helper.showMeals(db, contex);
+        int[] mealIds = new int[cursorMeals.getCount()];
+        cursorMeals.moveToFirst();
+        for(int i = 0; i < cursorMeals.getCount(); i++){
+            mealIds[i] = Integer.parseInt(cursorMeals.getString(6));
+            cursorMeals.moveToNext();
+        }
+        Cursor cursor = helper.showFavorites(db, contex);
+        cursor.moveToFirst();
+        for(int i = 0; i < cursor.getCount(); i++){
+            final int mealid = Integer.parseInt(cursor.getString(0));
+            Log.v("mealid", mealid+"");
+            int pos = -1;
+            for(int f = 0; f < mealIds.length; f++){
+                if(mealIds[f] == mealid){
+                    pos = f;
+                    break;
+                }
+            }
+            if(pos==-1){
+                return;
+            }
+            cursorMeals.moveToFirst();
+            cursorMeals.moveToPosition(pos);
+            String name = cursorMeals.getString(0);
+            String recipe = cursorMeals.getString(1);
+            int time = Integer.parseInt(cursorMeals.getString(2));
+            String ingredients = cursorMeals.getString(3);
+            LinearLayout l1 = new LinearLayout(this);
+            TextView t1 = new TextView(this);
+            ImageButton i1 = new ImageButton(this); // Star button will be
+            i1.setScaleX(0.5f);
+            i1.setScaleY(0.5f);
+            i1.setImageResource(R.drawable.star_on);
+            i1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    removeFromFavorites(mealid);
+                }
+            });
+            LinearLayout.LayoutParams imageParam = new LinearLayout.LayoutParams(70, 70);
+            imageParam.gravity=Gravity.END;
+            i1.setLayoutParams(imageParam);
+            l1.setOrientation(HORIZONTAL);
+            t1.setTextSize(18);
+            t1.setText(name);
+            l1.addView(t1);
+            l1.addView(i1);
+            layout.addView(l1);
+            RelativeLayout l2 = new RelativeLayout(this);
+            LinearLayout l3 = new LinearLayout(this);
+            l3.setOrientation(LinearLayout.VERTICAL);
+            LinearLayout l4 = new LinearLayout(this);
+            l4.setOrientation(LinearLayout.VERTICAL);
+            int imageDp = (int) getResources().getDimension(R.dimen.dpImage);
+            int textDp = (int) getResources().getDimension(R.dimen.dpText);
+            RelativeLayout.LayoutParams rightParam = new RelativeLayout.LayoutParams(imageDp, imageDp);
+            RelativeLayout.LayoutParams leftParam = new RelativeLayout.LayoutParams(textDp, WRAP_CONTENT);
+            rightParam.addRule(RelativeLayout.ALIGN_PARENT_END);
+            TextView nameText = new TextView(this);
+            nameText.setText("Ingredients: " +  ingredients);
+            l3.addView(nameText);
+            TextView timeText = new TextView(this);
+            timeText.setText("Preperation Time: " + time);
+            l3.addView(timeText);
+            TextView recipeText = new TextView(this);
+            recipeText.setText(recipe);
+            l3.addView(recipeText);
+            ImageView img = new ImageView(this);
+            img.setImageURI(Uri.parse(cursorMeals.getString(5)));
+            img.setMaxHeight(imageDp);
+            img.setMaxWidth(imageDp);
+            l4.addView(img);
+            l3.setLayoutParams(leftParam);
+            l4.setLayoutParams(rightParam);
+            l2.addView(l3);
+            l2.addView(l4);
+            layout.addView(l2);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        cursorMeals.close();
+    }
+
     public void showRecipe(int x){
         LinearLayout layout = (LinearLayout) findViewById(R.id.recipes);
         layout.removeAllViews();
         if(x==0){
-
             ListView lv2= new ListView(this);
-
             OnlineConnectionThree onlineConnectionThree=new OnlineConnectionThree(this,listMeals_url,lv2);
             onlineConnectionThree.execute();
             layout.addView(lv2);
-
-
         }
         else{
-
+            Cursor favCursor = helper.showFavorites(db, contex);
+            int[] idArray = new int[favCursor.getCount()];
+            favCursor.moveToFirst();
+            for(int i = 0; i < favCursor.getCount(); i++){
+                idArray[i] = Integer.parseInt(favCursor.getString(0));
+                favCursor.moveToNext();
+            }
             Cursor cursor = helper.showMeals(db, contex);
             cursor.moveToFirst();
             for(int i = 0; i < cursor.getCount(); i++){
@@ -92,13 +162,45 @@ public class SecondActivity extends Activity {
                 int time = Integer.parseInt(cursor.getString(2));
                 String ingredients = cursor.getString(3);
                 String type = cursor.getString(4); // Do nothing with it
+                final int aydi = Integer.parseInt(cursor.getString(6));
                 LinearLayout l1 = new LinearLayout(this);
                 TextView t1 = new TextView(this);
                 ImageButton i1 = new ImageButton(this); // Star button will be
+                i1.setScaleX(0.5f);
+                i1.setScaleY(0.5f);
+                boolean isFavorited = false;
+                for(int f = 0; f < idArray.length; f++){
+                 if(idArray[f] == aydi){
+                     isFavorited = true;
+                     break;
+                 }
+                }
+                if(isFavorited){
+                    i1.setImageResource(R.drawable.star_on);
+                    i1.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            removeFromFavorites(aydi);
+                        }
+                    });
+                }
+                else{
+                    i1.setImageResource(R.drawable.star_off);
+                    i1.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            addToFavorites(aydi);
+                        }
+                    });
+                }
+                LinearLayout.LayoutParams imageParam = new LinearLayout.LayoutParams(70, 70);
+                imageParam.gravity=Gravity.END;
+                i1.setLayoutParams(imageParam);
                 l1.setOrientation(HORIZONTAL);
                 t1.setTextSize(18);
                 t1.setText(name);
                 l1.addView(t1);
+                l1.addView(i1);
                 layout.addView(l1);
                 RelativeLayout l2 = new RelativeLayout(this);
                 LinearLayout l3 = new LinearLayout(this);
@@ -121,8 +223,6 @@ public class SecondActivity extends Activity {
                 l3.addView(recipeText);
                 ImageView img = new ImageView(this);
                 img.setImageURI(Uri.parse(cursor.getString(5)));
-
-
                 img.setMaxHeight(imageDp);
                 img.setMaxWidth(imageDp);
                 l4.addView(img);
@@ -134,6 +234,16 @@ public class SecondActivity extends Activity {
                 cursor.moveToNext();
             }
         }
+    }
+    void addToFavorites(int aydi){
+        helper.insertFavorite(db, aydi, 0);
+        showRecipe(1);
+        showFavorites();
+    }
+    void removeFromFavorites(int aydi){
+        helper.deleteFavorite(db, aydi);
+        showRecipe(1);
+        showFavorites();
     }
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -171,6 +281,7 @@ public class SecondActivity extends Activity {
 
         showRecipe(1);
         viewGroceryList();
+        showFavorites();
 
         ImageButton imgBtn = (ImageButton) findViewById(R.id.addRecipeButton);
         imgBtn.setOnClickListener(new View.OnClickListener() {

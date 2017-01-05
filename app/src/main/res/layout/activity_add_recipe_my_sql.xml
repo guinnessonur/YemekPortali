@@ -128,17 +128,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
-    <LinearLayout
-        android:layout_margin="2dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_gravity="center"
-            android:textSize="14sp"
-            android:text="Choose an image: "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
 
     <Button
         android:id="@+id/doneButton"

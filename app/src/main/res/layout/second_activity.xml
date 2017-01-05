@@ -65,9 +65,10 @@
                     <ScrollView
                         android:layout_marginRight="20dp"
                         android:layout_marginLeft="20dp"
+                        android:layout_height="1000dp"
                         android:layout_width="match_parent"
-                        android:id="@+id/deneme"
-                        android:layout_height="match_parent">
+                        android:id="@+id/deneme">
+
                         <LinearLayout
                             android:orientation="vertical"
                             android:id="@+id/recipes"

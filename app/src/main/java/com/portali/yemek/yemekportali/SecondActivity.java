@@ -421,7 +421,7 @@ public class SecondActivity extends Activity {
                 LinearLayout.LayoutParams.WRAP_CONTENT);
         doneButtonParameters.gravity=Gravity.END;
         doneButtonParameters.setMargins(20, 20, 20, 20);
-        doneButton.setText("DELET DIIIS");
+        doneButton.setText("DELETE THIS");
         doneButton.setLayoutParams(doneButtonParameters);
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -15,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by GURKAN32 on 12/31/2016.
@@ -75,15 +76,16 @@ public class Parser extends AsyncTask<Void,Integer,Integer> {
             //CREATE JO OBJ TO HOLD A SINGLE ITEM
             JSONObject jo=null;
             players.clear();
+            Random random=new Random();
+
             //LOOP THRU ARRAY
-            for(int i=0;i<ja.length();i++)
-            {
-                jo=ja.getJSONObject(i);
+
+                jo=ja.getJSONObject(random.nextInt(ja.length()));
                 //RETRIOEVE NAME
                 String name=jo.getString("name");
                 //ADD IT TO OUR ARRAYLIST
                 players.add(name);
-            }
+
             return 1;
         } catch (JSONException e) {
             e.printStackTrace();

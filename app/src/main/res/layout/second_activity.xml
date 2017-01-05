@@ -170,6 +170,8 @@
                         android:layout_marginTop="20dp"
                         android:background="#f4f3ef"
                         android:orientation="vertical"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                     </LinearLayout>

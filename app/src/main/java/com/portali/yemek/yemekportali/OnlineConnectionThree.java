@@ -1,5 +1,4 @@
 package com.portali.yemek.yemekportali;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -8,95 +7,112 @@ import android.widget.Toast;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
 
 /**
- * Created by GURKAN32 on 1/2/2017.
+ * Created by Oclemy on 5/15/2016 for ProgrammingWizards Channel and http://www.camposha.com.
  */
+public class OnlineConnectionThree extends AsyncTask<Void,Void,String> {
 
-    public class OnlineConnectionThree extends AsyncTask<Void,Integer,String> {
-        Context c;
-        String address;
-        ListView lv;
-        ProgressDialog pd;
-        String typeOfMeal;
+    Context c;
+    String urlAddress;
+    ListView lv;
+
+    ProgressDialog pd;
+
+    public OnlineConnectionThree(Context c, String urlAddress, ListView lv) {
+        this.c = c;
+        this.urlAddress = urlAddress;
+        this.lv = lv;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+
+        pd=new ProgressDialog(c);
+        pd.setTitle("Fetch");
+        pd.setMessage("Fetching....Please wait");
+        pd.show();
+    }
+
+    @Override
+    protected String doInBackground(Void... params) {
+        return this.downloadData();
+    }
 
 
-        public OnlineConnectionThree(Context c, String address, ListView lv) {
-            this.c = c;
-            this.address = address;
-            this.lv = lv;
-        }
-        //B4 JOB STARTS
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            pd=new ProgressDialog(c);
-            pd.setTitle("Fetch Data");
-            pd.setMessage("Fetching Data...Please wait");
-            pd.show();
-        }
-        @Override
-        protected String doInBackground(Void... params) {
-            String data=downloadData();
-            return data;
-        }
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            pd.dismiss();;
-            if(s != null)
-            {
-                ParserOne p1=new ParserOne(c,s,lv);
-                p1.execute();
-            }else
-            {
-                Toast.makeText(c,"Unable to download data",Toast.LENGTH_SHORT).show();
-            }
-        }
-        private String downloadData()
+    @Override
+    protected void onPostExecute(String s) {
+        super.onPostExecute(s);
+
+        pd.dismiss();
+
+        if(s==null)
         {
-            //connect and get a stream
-            InputStream is=null;
-            String line =null;
-            try {
-                URL url=new URL(address);
-                HttpURLConnection con= (HttpURLConnection) url.openConnection();
-                is=new BufferedInputStream(con.getInputStream());
-                BufferedReader br=new BufferedReader(new InputStreamReader(is));
-                StringBuffer sb=new StringBuffer();
-                if(br != null) {
-                    while ((line=br.readLine()) != null) {
-                        sb.append(line+"n");
-                    }
-                }else {
-                    return null;
-                }
-                return sb.toString();
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }finally {
-                if(is != null)
-                {
-                    try {
-                        is.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
+            Toast.makeText(c,"Unsuccessfull,Null returned",Toast.LENGTH_SHORT).show();
+        }else
+        {
+            //CALL DATA PARSER TO PARSE
+            ParserOne parser=new ParserOne(c,lv,s);
+            parser.execute();
+
+        }
+
+
+    }
+
+
+    private String downloadData()
+    {
+        HttpURLConnection con=Connector.connect(urlAddress);
+        if(con==null)
+        {
             return null;
         }
 
+        InputStream is=null;
+        try {
+
+            is=new BufferedInputStream(con.getInputStream());
+            BufferedReader br=new BufferedReader(new InputStreamReader(is));
+
+            String line=null;
+            StringBuffer response=new StringBuffer();
+
+            if(br != null)
+            {
+                while ((line=br.readLine()) != null)
+                {
+                    response.append(line+"\n");
+                }
+
+                br.close();
+
+            }else
+            {
+                return null;
+            }
+
+            return response.toString();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if(is != null)
+            {
+                try {
+                    is.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+
+        return null;
     }
+}

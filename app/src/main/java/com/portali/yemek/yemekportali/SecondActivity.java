@@ -27,6 +27,7 @@ import android.widget.TextView;
 
 import java.util.Date;
 
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static android.widget.LinearLayout.HORIZONTAL;
 
@@ -123,8 +124,8 @@ public class SecondActivity extends Activity {
             l3.addView(recipeText);
             ImageView img = new ImageView(this);
             img.setImageURI(Uri.parse(cursorMeals.getString(5)));
-            img.setMaxHeight(imageDp);
-            img.setMaxWidth(imageDp);
+            LinearLayout.LayoutParams imageParamss = new LinearLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT);
+            img.setLayoutParams(imageParamss);
             l4.addView(img);
             l3.setLayoutParams(leftParam);
             l4.setLayoutParams(rightParam);
@@ -223,8 +224,8 @@ public class SecondActivity extends Activity {
                 l3.addView(recipeText);
                 ImageView img = new ImageView(this);
                 img.setImageURI(Uri.parse(cursor.getString(5)));
-                img.setMaxHeight(imageDp);
-                img.setMaxWidth(imageDp);
+                LinearLayout.LayoutParams imageParamss = new LinearLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT);
+                img.setLayoutParams(imageParamss);
                 l4.addView(img);
                 l3.setLayoutParams(leftParam);
                 l4.setLayoutParams(rightParam);

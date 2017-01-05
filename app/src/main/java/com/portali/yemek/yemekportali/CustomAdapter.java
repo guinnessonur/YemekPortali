@@ -53,8 +53,8 @@ public class CustomAdapter extends BaseAdapter {
 
 
         TextView nameTxt= (TextView) convertView.findViewById(R.id.nameTxt);
-        TextView propellantTxt= (TextView) convertView.findViewById(R.id.propellantTxt);
-        TextView descTxt= (TextView) convertView.findViewById(R.id.descTxt);
+        TextView propellantTxt= (TextView) convertView.findViewById(R.id.descTxt);
+        TextView descTxt= (TextView) convertView.findViewById(R.id.propellantTxt);
         TextView timeTxt= (TextView) convertView.findViewById(R.id.timeToCooky);
         TextView ratingTxt= (TextView) convertView.findViewById(R.id.ratingForTheMeal);
         TextView ingredientTxt= (TextView) convertView.findViewById(R.id.ingredient);

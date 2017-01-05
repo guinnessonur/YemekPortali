@@ -56,7 +56,7 @@ import java.net.URLEncoder;
             pd.dismiss();;
             if(s != null)
             {
-                Parser p1=new Parser(c,s,lv);
+                ParserOne p1=new ParserOne(c,s,lv);
                 p1.execute();
             }else
             {

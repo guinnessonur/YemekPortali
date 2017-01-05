@@ -19,10 +19,6 @@ public class RegisterActivity extends Activity {
         editText1=(EditText)findViewById(R.id.name2);
         editText2=(EditText)findViewById(R.id.password2);
         editText3=(EditText)findViewById(R.id.mail);
-
-
-
-
     }
 
     public void OnReg(View view) {
